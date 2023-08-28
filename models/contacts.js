@@ -1,71 +1,71 @@
-const fs = require("fs/promises");
-const path = require("node:path");
-const crypto = require("node:crypto");
+// const fs = require("fs/promises");
+// const path = require("node:path");
+// const crypto = require("node:crypto");
 
-const contactsPath = path.join(__dirname, "./contacts.json");
+// const contactsPath = path.join(__dirname, "./contacts.json");
 
-const read = async () => {
-  const result = await fs.readFile(contactsPath, { encoding: "utf-8" });
-  return JSON.parse(result);
-};
+// const read = async () => {
+//   const result = await fs.readFile(contactsPath, { encoding: "utf-8" });
+//   return JSON.parse(result);
+// };
 
-const write = async (data) => {
-  return await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
-};
+// const write = async (data) => {
+//   return await fs.writeFile(contactsPath, JSON.stringify(data, null, 2));
+// };
 
-const listContacts = async () => {
-  return await read();
-};
+// const listContacts = async () => {
+//   return await read();
+// };
 
-const getContactById = async (contactId) => {
-  const contacts = await read();
-  return contacts.find((contact) => contact.id === contactId) || null;
-};
+// const getContactById = async (contactId) => {
+//   const contacts = await read();
+//   return contacts.find((contact) => contact.id === contactId) || null;
+// };
 
-const removeContact = async (contactId) => {
-  const contacts = await read();
-  const idx = contacts.findIndex((contact) => contact.id === contactId);
+// const removeContact = async (contactId) => {
+//   const contacts = await read();
+//   const idx = contacts.findIndex((contact) => contact.id === contactId);
 
-  if (idx === -1) return null;
+//   if (idx === -1) return null;
 
-  contacts.splice(idx, 1);
-  await write(contacts);
-  return contacts[idx];
-};
+//   contacts.splice(idx, 1);
+//   await write(contacts);
+//   return contacts[idx];
+// };
 
-const addContact = async (body) => {
-  const contacts = await read();
+// const addContact = async (body) => {
+//   const contacts = await read();
 
-  const newContact = {
-    id: crypto.randomUUID(),
-    ...body,
-  };
+//   const newContact = {
+//     id: crypto.randomUUID(),
+//     ...body,
+//   };
 
-  contacts.push(newContact);
-  await write(contacts);
+//   contacts.push(newContact);
+//   await write(contacts);
 
-  return newContact;
-};
+//   return newContact;
+// };
 
-const updateContact = async (contactId, body) => {
-  const contacts = await read();
+// const updateContact = async (contactId, body) => {
+//   const contacts = await read();
 
-  const idx = contacts.findIndex((contact) => contact.id === contactId);
-  if (idx === -1) return null;
+//   const idx = contacts.findIndex((contact) => contact.id === contactId);
+//   if (idx === -1) return null;
 
-  contacts[idx] = {
-    id: contactId,
-    ...body,
-  };
+//   contacts[idx] = {
+//     id: contactId,
+//     ...body,
+//   };
 
-  await write(contacts);
-  return contacts[idx];
-};
+//   await write(contacts);
+//   return contacts[idx];
+// };
 
-module.exports = {
-  listContacts,
-  getContactById,
-  removeContact,
-  addContact,
-  updateContact,
-};
+// module.exports = {
+//   listContacts,
+//   getContactById,
+//   removeContact,
+//   addContact,
+//   updateContact,
+// };
