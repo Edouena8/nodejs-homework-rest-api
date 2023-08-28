@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-const crypto = require("node:crypto");
+const crypto = require("crypto");
 
 const contactsPath = path.join(__dirname, "./contacts.json");
 
