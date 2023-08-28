@@ -1,5 +1,6 @@
 const { Contact } = require("../models/contact");
 const { HttpError, ctrlWrapper } = require("../helpers");
+
 const listContacts = async (_, res, __) => {
   const result = await Contact.find();
   res.json(result);
@@ -25,7 +26,7 @@ const removeContact = async (req, res, __) => {
   const { contactId } = req.params;
   const result = await Contact.findByIdAndRemove(contactId);
   if (!result) {
-    throw HttpError(404, "Not found");
+    throw HttpError(404, "Not found. Contact with such id didn't exist");
   }
 
   res.status({
@@ -41,7 +42,7 @@ const updateContact = async (req, res, __) => {
     new: true,
   });
   if (!result) {
-    throw HttpError(404, "Not found");
+    throw HttpError(404, "Not found.  Contact with such id doesn't exist");
   }
 
   res.json(result);
@@ -55,7 +56,7 @@ const updateFavorite = async (req, res, __) => {
     new: true,
   });
   if (!result) {
-    throw HttpError(404, "Not found");
+    throw HttpError(404, "Not found. Contact with such id doesn't exist");
   }
 
   res.json(result);
