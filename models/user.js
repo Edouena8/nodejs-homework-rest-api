@@ -27,7 +27,10 @@ const userSchema = new Schema(
       enum: subscrList,
       default: "starter",
     },
-    token: String,
+    token: {
+      type: String,
+      default: "",
+    },
   },
   {
     versionKey: false,
@@ -44,7 +47,7 @@ const registerSchema = Joi.object({
 });
 
 const subscrSchema = Joi.object({
-  subscrSchema: Joi.string().validate(...subscrList),
+  subscription: Joi.string().valid(...subscrList),
 });
 
 const loginSchema = Joi.object({
