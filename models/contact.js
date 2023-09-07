@@ -34,6 +34,11 @@ const contactSchema = new Schema(
       type: String,
       enum: relationships,
     },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      require: true,
+    },
   },
   {
     versionKey: false,
